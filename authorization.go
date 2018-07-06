@@ -7,7 +7,6 @@ import (
 	"encoding/hex"
 	"fmt"
 	"hash"
-	"io"
 	"net/url"
 	"regexp"
 	"strings"
@@ -119,7 +118,7 @@ func (ah *authorization) hash(a string) (s string) {
 		h = sha256.New()
 	}
 
-	io.WriteString(h, a)
+	h.Write([]byte(a))
 	s = hex.EncodeToString(h.Sum(nil))
 
 	return
